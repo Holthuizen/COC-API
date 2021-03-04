@@ -65,8 +65,6 @@ class ClanInfo:
 
 
 
-
-
 claninfo = ClanInfo("#29G2CU2JY")
 claninfo.clan_war_league_event(2)
 
