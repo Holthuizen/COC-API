@@ -42,6 +42,7 @@ tags = claninfo.get_tags("%2329G2CU2JY")
 
 print("Retrieve information about individual clan war league war, by warTag", claninfo.clanwarleagues_wars("#2RLL9UYPG") )
 
+#zin
 
 #clan tag = #29G2CU2JY
 #war tag = #2RL9C2CUG
