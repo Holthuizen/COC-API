@@ -72,6 +72,7 @@ for war in claninfo.ownClanWars:
         print(member['name'])
 
 
+#zin
 
 #clan tag = #29G2CU2JY
 #war tag = #2RL9C2CUG
