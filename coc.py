@@ -68,13 +68,30 @@ class ClanInfo:
 claninfo = ClanInfo("#29G2CU2JY")
 claninfo.clan_war_league_event(2)
 
-print(len(claninfo.ownClanWars))
-for war in claninfo.ownClanWars: 
-    for member in war.responce["clan"]["members"]: 
-        print(member['name'])
+print("number of clan war entries:", len(claninfo.ownClanWars))
+for war in claninfo.ownClanWars:
+    if war.responce["clan"]["tag"] == '#29G2CU2JY':
+        for member in war.responce["clan"]["members"]: 
 
+            # FOR DISPLAY PURPOSES
+            if len(member['name']) <= 6: #character limit that will place tab on right spot
+                member['name'] += "\t" #if name would be too short, add a tab to the name 
+            # FOR DISPLAY PURPOSES
 
-#zin
+            print(member['name'],"\t",member['townhallLevel'],"\t",member['mapPosition'])
+    print("\n")
+    
+    if war.responce["opponent"]["tag"] == '#29G2CU2JY':
+        for member in war.responce["opponent"]["members"]: 
+            
+            # FOR DISPLAY PURPOSES
+            if len(member['name']) <= 6: #character limit that will place tab on right spot
+                member['name'] += "\t" #if name would be too short, add a tab to the name 
+            # FOR DISPLAY PURPOSES
+
+            print(member['name'],"\t",member['townhallLevel'],"\t",member['mapPosition'])
+    print("\n")
+
 
 #clan tag = #29G2CU2JY
 #war tag = #2RL9C2CUG
