@@ -59,6 +59,9 @@ class ClanInfo:
                     _war = WarDay(day,warTag,res)
                    # print(_war.warTag)
                     self.ownClanWars.append( _war ) 
+  
+
+ 
 
 
 
@@ -68,29 +71,72 @@ class ClanInfo:
 claninfo = ClanInfo("#29G2CU2JY")
 claninfo.clan_war_league_event(2)
 
-print("number of clan war entries:", len(claninfo.ownClanWars))
-for war in claninfo.ownClanWars:
-    if war.responce["clan"]["tag"] == '#29G2CU2JY':
-        for member in war.responce["clan"]["members"]: 
 
-            # FOR DISPLAY PURPOSES
-            if len(member['name']) <= 6: #character limit that will place tab on right spot
-                member['name'] += "\t" #if name would be too short, add a tab to the name 
-            # FOR DISPLAY PURPOSES
 
-            print(member['name'],"\t",member['townhallLevel'],"\t",member['mapPosition'])
-    print("\n")
+class Fight(): 
+    def __init__(self,tag):
+        self.tag = tag 
+        self.townhallLevel = None
+        self.stars = None
+        self.mapPosition = None
+        self.opponentTag = None
+        self.opponentMapPosition = None
+        self.opponentTownhallLevel = None
+
+
+def attack_results():
+    fights = {}
     
-    if war.responce["opponent"]["tag"] == '#29G2CU2JY':
-        for member in war.responce["opponent"]["members"]: 
-            
-            # FOR DISPLAY PURPOSES
-            if len(member['name']) <= 6: #character limit that will place tab on right spot
-                member['name'] += "\t" #if name would be too short, add a tab to the name 
-            # FOR DISPLAY PURPOSES
+    for fight in claninfo.ownClanWars: 
+        for member in fight.responce["clan"]["members"]:
+            if 'attacks' in member: 
+                F = Fight(member['tag'])
+                F.townhallLevel = member["townhallLevel"]
+                F.mapPosition = member['mapPosition']
+                F.opponentTag =  member['attacks'][0]['defenderTag']
+                F.stars =   member['attacks'][0]['stars']
 
-            print(member['name'],"\t",member['townhallLevel'],"\t",member['mapPosition'])
-    print("\n")
+            for opponent in fight.responce['opponent']['members']: 
+                if opponent['tag'] == F.opponentTag: 
+                    F.opponentTownhallLevel = opponent['townhallLevel']
+                    F.opponentMapPosition = opponent["mapPosition"]
+            fights[ member['tag'] ]= F
+
+    return fights
+results = attack_results()
+
+for key in results: 
+    fight = results[key]
+    print("stars: ", fight.stars)
+    print("tags: ", fight.tag, fight.opponentTag)
+    print("townhall levels:" , fight.townhallLevel, fight.opponentTownhallLevel)
+    print("--------------------------------------------------------------------")
+
+
+
+# print("number of clan war entries:", len(claninfo.ownClanWars))
+# for war in claninfo.ownClanWars:
+#     if war.responce["clan"]["tag"] == '#29G2CU2JY':
+#         for member in war.responce["clan"]["members"]: 
+
+#             # FOR DISPLAY PURPOSES
+#             if len(member['name']) <= 6: #character limit that will place tab on right spot
+#                 member['name'] += "\t" #if name would be too short, add a tab to the name 
+#             # FOR DISPLAY PURPOSES
+
+#             print(member['name'],"\t",member['townhallLevel'],"\t",member['mapPosition'])
+#     print("\n")
+    
+#     if war.responce["opponent"]["tag"] == '#29G2CU2JY':
+#         for member in war.responce["opponent"]["members"]: 
+            
+#             # FOR DISPLAY PURPOSES
+#             if len(member['name']) <= 6: #character limit that will place tab on right spot
+#                 member['name'] += "\t" #if name would be too short, add a tab to the name 
+#             # FOR DISPLAY PURPOSES
+
+#             print(member['name'],"\t",member['townhallLevel'],"\t",member['mapPosition'])
+#     print("\n")
 
 
 #clan tag = #29G2CU2JY
