@@ -86,7 +86,6 @@ class Fight():
 
 def attack_results():
     fights = {}
-    
     for fight in claninfo.ownClanWars: 
         for member in fight.responce["clan"]["members"]:
             if 'attacks' in member: 
