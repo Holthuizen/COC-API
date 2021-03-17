@@ -1,6 +1,7 @@
 #api endpoints
 import requests as request
 import json 
+import pandas as pd
 
 #per day info of a clan-war-league
 class WarDay(): 
@@ -71,7 +72,7 @@ class ClanInfo:
 claninfo = ClanInfo("#29G2CU2JY")
 claninfo.clan_war_league_event(2)
 
-
+print(claninfo)
 
 class Fight(): 
     def __init__(self,tag):
@@ -111,7 +112,7 @@ for key in results:
     print("townhall levels:" , fight.townhallLevel, fight.opponentTownhallLevel)
     print("--------------------------------------------------------------------")
 
-
+print("test")
 
 # print("number of clan war entries:", len(claninfo.ownClanWars))
 # for war in claninfo.ownClanWars:
